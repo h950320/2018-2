@@ -1,5 +1,8 @@
 package exbean;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class studentDAO {
  public void insertStudent(studentVO item) throws Exception {
   String no = item.getNo();
@@ -16,4 +19,22 @@ public class studentDAO {
   pstmt.close();
   conn.close();
  }
+ 
+ public List<studentVO> selectStudent() throws Exception { 
+   List<studentVO> items = new ArrayList<studentVO>(); 
+
+   Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","201412387","201412387");
+
+   PreparedStatement sql = conn.prepareStatement("select * from student"); 
+   ResultSet rs = sql.executeQuery(); 
+   while(rs.next()) { 
+    studentVO item = new studentVO(); 
+    item.setNo(rs.getString("no")); 
+    item.setName(rs.getString("name")); 
+    items.add(item); 
+    //System.out.print(items); 
+   }  
+   return items; 
+  }
+ 
 }
