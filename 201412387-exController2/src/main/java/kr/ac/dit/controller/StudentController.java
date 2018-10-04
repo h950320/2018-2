@@ -14,5 +14,5 @@ public class StudentController {
 		studentVO.setName("PARK HYEON JU");
 		model.addAttribute(studentVO);
 	}
-
+//
 }
